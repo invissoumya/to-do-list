@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Middleware;
+use Illuminate\Http\Request;
+use Closure;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 
@@ -12,10 +14,11 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    protected function redirectTo($request)
+    
+    public function handle(Request $request, Closure $next, $userType)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
-        }
+        if(!auth()->user()){
+            return response()->json(['You do not have permission to access for this page.']);
+        }      
     }
 }
