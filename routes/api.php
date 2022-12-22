@@ -20,9 +20,10 @@ use App\Http\Controllers\api\ToDosController;
 
 
 
-Route::apiResource('registrations',RegistrationController::class);
+//Route::apiResource('registrations',RegistrationController::class);
 
 Route::post('login',[LoginController::class,'UserLogin']);
+Route::post('registrations',[RegistrationController::class,'registration']);
 
 
 
