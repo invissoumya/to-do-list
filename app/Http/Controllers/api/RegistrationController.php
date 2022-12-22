@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegistrationRequest;
@@ -14,8 +13,7 @@ class RegistrationController extends Controller
 {
     public function registration(RegistrationRequest $request)
     {
-       $request['remember_token'] = Str::random(10);
-      
+       $request['remember_token'] = Str::random(10);    
        $registration = User::create([
         'first_name' =>$request->first_name,
         'last_name' =>$request->last_name,
