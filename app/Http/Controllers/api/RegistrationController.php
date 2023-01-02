@@ -4,7 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RegistrationRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Str;
 
 use Illuminate\Database\Eloquent\Model;

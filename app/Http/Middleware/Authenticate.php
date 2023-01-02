@@ -14,11 +14,14 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    
-    public function handle(Request $request, Closure $next, $userType)
+
+     public function handle($request, Closure $next, ...$guards)
     {
         if(!auth()->user()){
             return response()->json(['You do not have permission to access for this page.']);
-        }      
+        }
     }
+
+    
+   
 }
