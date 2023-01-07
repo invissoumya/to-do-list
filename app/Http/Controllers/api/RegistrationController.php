@@ -1,19 +1,33 @@
 <?php
 namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RegistrationRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Str;
+use Validator;
 
 use Illuminate\Database\Eloquent\Model;
 
 class RegistrationController extends Controller
 {
-    public function registration(RegistrationRequest $request)
+    public function registration(Request $request)
     {
-       $request['remember_token'] = Str::random(10);    
+        $request['remember_token'] = Str::random(10); 
+        $input = $request->all();
+        
+        $validation = Validator::make($input, [
+            'first_name' => "required|max:100",
+            'last_name' => "required|max:100",
+            'email' => "required|max:100|email|unique:users",
+            'password' => "required|min:8|max:25|confirmed",
+        ]);
+
+        if($validation->fails())
+        {
+            return response()->json(['error' =>$validation->errors()],422);
+        }          
+
        $registration = User::create([
         'first_name' =>$request->first_name,
         'last_name' =>$request->last_name,
